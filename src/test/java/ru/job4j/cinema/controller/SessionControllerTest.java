@@ -31,7 +31,7 @@ class SessionControllerTest {
     }
 
     @Test
-    public void whenRequestSessionListPageThenGet(){
+    public void whenRequestSessionListPageThenGet() {
         var session1 = new SessionDto(1, "filmName", "hallsName", LocalDateTime.now(), LocalDateTime.now(), 100, 1, 1);
         var session2 = new SessionDto(2, "filmName1", "hallsName1", LocalDateTime.now(), LocalDateTime.now(), 200, 2, 2);
         var expectedSessions = List.of(session1, session2);

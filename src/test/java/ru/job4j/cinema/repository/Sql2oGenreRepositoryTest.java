@@ -15,7 +15,7 @@ class Sql2oGenreRepositoryTest {
     @BeforeAll
     public static void initRepositories() throws Exception {
         var properties = new Properties();
-        try(var inputStream = Sql2oGenreRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
+        try (var inputStream = Sql2oGenreRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
             properties.load(inputStream);
         }
         var url = properties.getProperty("datasource.url");
@@ -30,7 +30,7 @@ class Sql2oGenreRepositoryTest {
     }
 
     @Test
-    public void whenFindGenreByIdThenGet(){
+    public void whenFindGenreByIdThenGet() {
         var genre = sql2oGenreRepository.findById(1);
         assertThat(genre.getName()).isEqualTo("Драма");
     }

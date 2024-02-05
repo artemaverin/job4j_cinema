@@ -15,7 +15,7 @@ class Sql2oFileRepositoryTest {
     @BeforeAll
     public static void initRepositories() throws Exception {
         var properties = new Properties();
-        try(var inputStream = Sql2oFileRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
+        try (var inputStream = Sql2oFileRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
             properties.load(inputStream);
         }
         var url = properties.getProperty("datasource.url");
@@ -30,7 +30,7 @@ class Sql2oFileRepositoryTest {
     }
 
     @Test
-    public void whenFindFileByIdThenGet(){
+    public void whenFindFileByIdThenGet() {
         var file = sql2oFileRepository.findById(3).get();
         assertThat(file.getName()).isEqualTo("Dark Knight");
     }

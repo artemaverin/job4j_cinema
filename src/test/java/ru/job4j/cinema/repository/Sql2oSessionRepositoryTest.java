@@ -15,7 +15,7 @@ class Sql2oSessionRepositoryTest {
     @BeforeAll
     public static void initRepositories() throws Exception {
         var properties = new Properties();
-        try(var inputStream = Sql2oSessionRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
+        try (var inputStream = Sql2oSessionRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
             properties.load(inputStream);
         }
         var url = properties.getProperty("datasource.url");
@@ -36,7 +36,7 @@ class Sql2oSessionRepositoryTest {
     }
 
     @Test
-    public void whenFindSessionByIdThenGet(){
+    public void whenFindSessionByIdThenGet() {
         var session = sql2oSessionRepository.findById(2).get();
         assertThat(session.getHallsId()).isEqualTo(2);
         assertThat(session.getFilmId()).isEqualTo(2);

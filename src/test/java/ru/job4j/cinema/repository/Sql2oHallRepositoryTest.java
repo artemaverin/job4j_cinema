@@ -15,7 +15,7 @@ class Sql2oHallRepositoryTest {
     @BeforeAll
     public static void initRepositories() throws Exception {
         var properties = new Properties();
-        try(var inputStream = Sql2oHallRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
+        try (var inputStream = Sql2oHallRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
             properties.load(inputStream);
         }
         var url = properties.getProperty("datasource.url");
@@ -30,7 +30,7 @@ class Sql2oHallRepositoryTest {
     }
 
     @Test
-    public void whenFindHallByIdThenGet(){
+    public void whenFindHallByIdThenGet() {
         var hall = sql2oHallRepository.findById(2);
         assertThat(hall.getName()).isEqualTo("SmallHall");
     }

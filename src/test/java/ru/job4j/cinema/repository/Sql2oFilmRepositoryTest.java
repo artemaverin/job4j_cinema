@@ -16,7 +16,7 @@ class Sql2oFilmRepositoryTest {
     @BeforeAll
     public static void initRepositories() throws Exception {
         var properties = new Properties();
-        try(var inputStream = Sql2oFilmRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
+        try (var inputStream = Sql2oFilmRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
             properties.load(inputStream);
         }
         var url = properties.getProperty("datasource.url");
@@ -37,7 +37,7 @@ class Sql2oFilmRepositoryTest {
     }
 
     @Test
-    public void whenFindFilmByIdThenGet(){
+    public void whenFindFilmByIdThenGet() {
         var film = sql2oFilmRepository.findById(2).get();
         assertThat(film.getName()).isEqualTo("The Godfather");
     }

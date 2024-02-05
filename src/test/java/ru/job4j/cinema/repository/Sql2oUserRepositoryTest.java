@@ -56,7 +56,7 @@ class Sql2oUserRepositoryTest {
         sql2oUserRepository.save(new User(0, "email1", "name1", "password1"));
         sql2oUserRepository.save(new User(0, "email2", "name2", "password2"));
         sql2oUserRepository.save(new User(0, "email3", "name3", "password3"));
-        try(var connection = sql2o.open()) {
+        try (var connection = sql2o.open()) {
             var query = connection.createQuery("SELECT * FROM users");
             var rowCount = query.setColumnMappings(User.COLUMN_MAPPING).executeAndFetch(User.class);
             Assertions.assertThat(rowCount.size()).isEqualTo(3);
@@ -65,7 +65,7 @@ class Sql2oUserRepositoryTest {
 
     @Test
     public void whenDontSaveThenNothingFound() {
-        try(var connection = sql2o.open()) {
+        try (var connection = sql2o.open()) {
             var query = connection.createQuery("SELECT * FROM users");
             var rowCount = query.setColumnMappings(User.COLUMN_MAPPING).executeAndFetch(User.class);
             assertThat(sql2oUserRepository.findByEmailAndPassword("email", "password")).isEqualTo(empty());

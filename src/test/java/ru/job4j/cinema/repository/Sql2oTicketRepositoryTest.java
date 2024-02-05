@@ -20,7 +20,7 @@ class Sql2oTicketRepositoryTest {
     @BeforeAll
     public static void initRepositories() throws Exception {
         var properties = new Properties();
-        try(var inputStream = Sql2oTicketRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
+        try (var inputStream = Sql2oTicketRepositoryTest.class.getClassLoader().getResourceAsStream("connection.properties")) {
             properties.load(inputStream);
         }
         var url = properties.getProperty("datasource.url");
@@ -45,7 +45,7 @@ class Sql2oTicketRepositoryTest {
     @Test
     public void whenSaveTicketThenGet() {
         var ticket = sql2oTicketRepository.save(new Ticket(0, 1, 1, 1, 1));
-        try(var connection = sql2o.open()) {
+        try (var connection = sql2o.open()) {
             var query = connection.createQuery("SELECT * from tickets WHERE id =:id");
             query.addParameter("id", 1);
             var savedTicket = query.setColumnMappings(Ticket.COLUMN_MAPPING).executeAndFetchFirst(Ticket.class);
@@ -57,7 +57,7 @@ class Sql2oTicketRepositoryTest {
     public void whenSaveSeveralThenGetCount() {
         var ticket = sql2oTicketRepository.save(new Ticket(0, 1, 1, 1, 0));
         var ticket2 = sql2oTicketRepository.save(new Ticket(1, 2, 2, 2, 0));
-        try(var connection = sql2o.open()) {
+        try (var connection = sql2o.open()) {
             var query = connection.createQuery("SELECT * FROM tickets");
             var rowCount = query.setColumnMappings(Ticket.COLUMN_MAPPING).executeAndFetch(Ticket.class);
             assertThat(rowCount.size()).isEqualTo(2);

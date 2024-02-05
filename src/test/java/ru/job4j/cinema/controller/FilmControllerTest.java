@@ -30,7 +30,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void whenRequestFilmListPageThenGet(){
+    public void whenRequestFilmListPageThenGet() {
         var film1 = new FilmDto(1, "name", "description", 1990, 1, 12, "genre", 1);
         var film2 = new FilmDto(2, "name", "description", 1990, 2, 13, "genre2", 2);
         var expectedFilms = List.of(film1, film2);
