@@ -18,12 +18,11 @@ public class TicketController {
 
     @PostMapping("/result")
     public String create(@ModelAttribute Ticket ticket, Model model) {
-        try {
-            ticketService.save(ticket);
-            return "tickets/success";
-        } catch (Exception e) {
+        var optionalTicket = ticketService.save(ticket);
+        if (optionalTicket.isEmpty()) {
             model.addAttribute("message", "Билет на эти места уже забронирован");
             return "tickets/reject";
         }
+        return "tickets/success";
     }
 }

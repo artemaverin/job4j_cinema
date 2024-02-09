@@ -20,14 +20,11 @@ class TicketControllerTest {
 
     private TicketService ticketService;
 
-    private SessionService sessionService;
-
     private TicketController ticketController;
 
     @BeforeEach
     public void initServices() {
         ticketService = mock(TicketService.class);
-        sessionService = mock(SessionService.class);
         ticketController = new TicketController(ticketService);
     }
 
@@ -47,8 +44,8 @@ class TicketControllerTest {
 
     @Test
     public void whenSomeExceptionThrownThenGetErrorPageWithMessage() {
-        var expectedException = new RuntimeException("Билет на эти места уже забронирован");
-        when(ticketService.save(any())).thenThrow(expectedException);
+        var expectedException = "Билет на эти места уже забронирован";
+        when(ticketService.save(any())).thenReturn(Optional.empty());
 
         var model = new ConcurrentModel();
         var ticket = new Ticket(1, 1, 1, 1, 1);
@@ -56,7 +53,7 @@ class TicketControllerTest {
         var actualExceptionMessage = model.getAttribute("message");
 
         assertThat(view).isEqualTo("tickets/reject");
-        assertThat(actualExceptionMessage).isEqualTo(expectedException.getMessage());
+        assertThat(actualExceptionMessage).isEqualTo(expectedException);
     }
 
 }
