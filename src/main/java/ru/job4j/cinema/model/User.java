@@ -68,11 +68,11 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return id == user.id;
+        return Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(email);
     }
 }

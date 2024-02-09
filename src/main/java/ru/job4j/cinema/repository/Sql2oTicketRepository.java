@@ -11,6 +11,8 @@ import java.util.Optional;
 @Repository
 public class Sql2oTicketRepository implements TicketRepository {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(Sql2oTicketRepository.class);
+
     private final Sql2o sql2o;
 
     public Sql2oTicketRepository(Sql2o sql2o) {
@@ -33,6 +35,9 @@ public class Sql2oTicketRepository implements TicketRepository {
             int generatedId = query.executeUpdate().getKey(Integer.class);
             ticket.setId(generatedId);
             return Optional.of(ticket);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
         }
+        return Optional.empty();
     }
 }
